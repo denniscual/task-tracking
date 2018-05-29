@@ -30,8 +30,8 @@ myModule();
 -   [searchWord](#searchword)
 -   [searchWordInFiles](#searchwordinfiles)
 -   [then](#then)
--   [prettierText](#prettiertext)
 -   [cleanLineText](#cleanlinetext)
+-   [prettierText](#prettiertext)
 
 ### compose
 
@@ -100,18 +100,6 @@ Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/
 
 Returns a single Promise that resolves when all of the promises in the iterable argument have resolved or when the iterable argument contains no promises. It rejects with the reason of the first promise that rejects.
 
-### prettierText
-
-prettierText :: Array => void
-
-Display the results on the console with the pretty format.
-
-**Parameters**
-
--   `results` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
-
-Returns **Void** 
-
 ### cleanLineText
 
 cleanLineText :: String => String => String
@@ -124,6 +112,19 @@ Remove unnecessary characters on the line text to be more readable based on the 
 -   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** is a line text
 
 Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** New text.
+
+### prettierText
+
+prettierText :: Array => void
+
+Display the results on the console with the pretty format.
+
+**Parameters**
+
+-   `cmd`  
+-   `results` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
+
+Returns **Void** 
 
 ## License
 
