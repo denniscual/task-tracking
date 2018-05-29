@@ -1,10 +1,8 @@
-// @flow
+import { searchWordInFiles } from './utils'
 
-/**
- * This function says hello.
- * @param name Some name to say hello for.
- * @returns The hello.
- */
-const sayHello = (name: string = "Haz"): string => `Hello, ${name}!`;
+searchWordInFiles('TODO', 'src/**/*.js')
+  .then(console.log)
+  .catch(console.error)
 
-export default sayHello;
+
+

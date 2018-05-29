@@ -24,17 +24,17 @@ myModule();
 
 #### Table of Contents
 
--   [sayHello](#sayhello)
+-   [getHello](#gethello)
 
-### sayHello
+### getHello
 
-This function says hello.
+This function get the name of the given user
 
 **Parameters**
 
--   `name` **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** Some name to say hello for.
+-   `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** is an object
 
-Returns **[string](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** The hello.
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user name
 
 ## License
 
