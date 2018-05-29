@@ -3,6 +3,13 @@ import isEmpty from 'lodash.isempty'
 // for search words
 import { createReadStream } from 'fs'
 import fastGlob from 'fast-glob'
+// for prettier text
+import { blue, gray, yellow } from 'colors'
+
+/**
+ * Performs right-to-left function composition.
+ */
+export const compose = (...fns) => fns.reduce((f, g) => (...args) => f(g(...args)))
 
 /**
  * getFileName :: String => String
@@ -115,4 +122,58 @@ export const searchWordInFiles = (word, pattern, options) => {
         .all(promises)
         .then(removeNil) // removing null and empty object element
     })
+}
+
+/**
+ * prettierText :: Array => void
+ *
+ * Display the results on the console with the pretty format.
+ * @param {Array} results
+ * @return {Void}
+ */
+const prettierText = (results) => {
+  /**
+   * cleanLineText :: String => String => String
+   * 
+   * Remove unnecessary characters on the line text to be more readable based on the given command name. The final output is also trimmed.
+   * @param {String} cmd is a command name.
+   * @param {String} text is a line text
+   * @return {String} New text.
+   */
+  const cleanLineText = (cmd) => (text) => {
+    // Handle if the command is todo
+    if (cmd === 'TODO') {
+      return text.replace('// TODO:', '').trim()
+    }
+    // Handle if the comman is fixme
+    return text.replace('// FIXME:', '').trim()
+  }
+
+  // iterate to each results
+  results.forEach((result) => {
+    const { fileName, matches } = result
+    // log the filename
+    console.info(blue(fileName))
+    // iterate to each matches line of strings
+    matches.forEach((line) => {
+      const coloredLineNumber = gray(`(${line.lineNumber})`)
+      const coloredLineText = compose(yellow, cleanLineText('TODO'))
+      // log the line information
+      console.info(`  ${yellow('-')} ${coloredLineText(line.text)} ${coloredLineNumber}`)
+    })
+  })
+}
+
+// action fires when the command todo triggers
+export const todoAction = (pattern) => {
+  searchWordInFiles('TODO', pattern)
+    .then(prettierText)
+    .catch(console.error)
+}
+
+// action fires when the command fixme triggers
+export const fixmeAction = (pattern) => {
+  searchWordInFiles('FIXME', pattern)
+    .then(prettierText)
+    .catch(console.error)
 }

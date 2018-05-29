@@ -24,17 +24,106 @@ myModule();
 
 #### Table of Contents
 
--   [getHello](#gethello)
+-   [compose](#compose)
+-   [getRelativePath](#getrelativepath)
+-   [removeNil](#removenil)
+-   [searchWord](#searchword)
+-   [searchWordInFiles](#searchwordinfiles)
+-   [then](#then)
+-   [prettierText](#prettiertext)
+-   [cleanLineText](#cleanlinetext)
 
-### getHello
+### compose
 
-This function get the name of the given user
+Performs right-to-left function composition.
 
 **Parameters**
 
--   `user` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** is an object
+-   `fns` **...any** 
 
-Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** user name
+### getRelativePath
+
+getFileName :: String => String
+
+It returns a path which is relative to given pattern path. It removes the cwd (current working directory) path that leave only the necessary path.
+
+**Parameters**
+
+-   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** file name
+
+### removeNil
+
+removeNull :: Array(a) => Array(a)
+
+It remove the included null or empty object element on the array.
+
+**Parameters**
+
+-   `arr` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
+
+Returns **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** Filtered array.
+
+### searchWord
+
+searchWord :: (String, String) => Promise
+
+Search the word on the given file. It is case-sensitive search utility.
+
+**Parameters**
+
+-   `word` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `path` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** ? where you can control the search mechanism. We can set flags (Regex) and make not case sensitive on the options.
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** Promise resolve type is an object with the included attributes 'matches and count'. If the
+    given word cannot find in the file, it returns empty object.-   Promise reject type is an instance of Error.
+
+### searchWordInFiles
+
+searchWordInFiles :: (String, String) => Promise
+
+Search the word in the files which are resided at the given directory. It recursively reads the nested files (uses fast-glob) for matching files.
+
+**Parameters**
+
+-   `word` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** 
+-   `pattern` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** a string value which is used for filtering files.
+-   `options` **[Object](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object)** where you can control the search mechanism. It attributes to make the search as not case-sensitive.
+                            We can also use this options to skip some files.
+
+Returns **[Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise)** Promise resolve type is an array of object with the included attributes 'fileName, matches, and count'. If the
+    given word cannot find in the file, it returns empty array.-   Promise reject type is an instance of Error.
+
+### then
+
+Returns a single Promise that resolves when all of the promises in the iterable argument have resolved or when the iterable argument contains no promises. It rejects with the reason of the first promise that rejects.
+
+### prettierText
+
+prettierText :: Array => void
+
+Display the results on the console with the pretty format.
+
+**Parameters**
+
+-   `results` **[Array](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Array)** 
+
+Returns **Void** 
+
+### cleanLineText
+
+cleanLineText :: String => String => String
+
+Remove unnecessary characters on the line text to be more readable based on the given command name. The final output is also trimmed.
+
+**Parameters**
+
+-   `cmd` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** is a command name.
+-   `text` **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** is a line text
+
+Returns **[String](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/String)** New text.
 
 ## License
 
